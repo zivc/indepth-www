@@ -16,10 +16,16 @@ class Logo extends React.Component {
 
   componentDidMount() {
     window.addEventListener('mousemove', Logo.onMousemove.bind(this));
+    if (window.DeviceMotionEvent !== undefined) {
+      window.addEventListener('devicemotion', Logo.onDeviceMotion.bind(this));
+    }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousemove', Logo.onMousemove.bind(this));
+    window.removeEventListener('devicemotion', Logo.onMousemove.bind(this));
+    if (window.DeviceMotionEvent !== undefined) {
+      window.removeEventListener('devicemotion', Logo.onDeviceMotion.bind(this));
+    }
   }
 
   static onMousemove(e) {
@@ -38,6 +44,13 @@ class Logo extends React.Component {
     const transform = `translate(${mouseX * sensitivityMultiplier}px, ${mouseY * sensitivityMultiplier}px)`;;
     div.style.webkitTransform = transform;
     div.style.transform = transform;
+  }
+
+  static onDeviceMotion(e) {
+    const x = Math.max(-2, Math.min(e.accelerationIncludingGravity.x, 2)) * 100;
+    const y = Math.max(-2, Math.min(e.accelerationIncludingGravity.y, 2)) * 100;
+    Logo.doAwesome(x, y, 0.1, `.${styles.boxTransformer}`);
+    Logo.doAwesome(x, y, 0.05, `.${styles.bars}`);
   }
 }
 
