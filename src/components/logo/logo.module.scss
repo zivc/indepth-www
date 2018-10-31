@@ -4,6 +4,8 @@
   //background-size: 100% 100%;
   //background-position: center center;
 
+  margin-left:-15vmin;
+  margin-top:-5vmin;
   position:absolute;
   top:50%;
   left:50%;
@@ -28,7 +30,6 @@
 .bars {
   opacity:1;
   position: absolute;
-  transform:translate(0%, 0%);
   top:50%;
   right:0%;
   width:86.5%;
@@ -48,6 +49,10 @@
     right:15.6%;
     top:-100%;
   }
+}
+
+.boxTransformer {
+  height: 100%;
 }
 
 .box {
